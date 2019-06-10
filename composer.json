@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Rocket\\": "src/Rocket"
+    }
+  },
+  "require": {
+    "php": "^7.2",
+    "ext-json": "*",
+    "predis/predis": "^1.1",
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
