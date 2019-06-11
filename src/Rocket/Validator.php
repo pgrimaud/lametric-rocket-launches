@@ -24,7 +24,7 @@ class Validator
     private $nbLaunches;
 
     /**
-     * @var integer
+     * @var bool
      */
     private $showRocketName;
 
@@ -53,11 +53,7 @@ class Validator
             $this->nbLaunches = (int)$this->parameters['launches'];
         }
 
-        if (!in_array($this->parameters['rocket'], [0, 1])) {
-            $this->showRocketName = 0;
-        } else {
-            $this->showRocketName = (int)$this->parameters['rocket'];
-        }
+        $this->showRocketName = (bool)$this->parameters['rocket'];
     }
 
     /**
@@ -69,9 +65,9 @@ class Validator
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getShowRocketName(): int
+    public function getShowRocketName(): bool
     {
         return $this->showRocketName;
     }
