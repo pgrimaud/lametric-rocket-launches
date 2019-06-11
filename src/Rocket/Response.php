@@ -53,7 +53,7 @@ class Response
 
             $rocket = $launches[$i];
 
-            if ($validator->getShowRocketName() === 1) {
+            if ($validator->getShowRocketName()) {
 
                 $frames[] = [
                     'icon'  => self::ICON_ID,
