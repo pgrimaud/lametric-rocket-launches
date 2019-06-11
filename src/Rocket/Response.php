@@ -37,7 +37,7 @@ class Response
     }
 
     /**
-     * @param array     $launches
+     * @param array $launches
      * @param Validator $validator
      *
      * @return string
@@ -65,7 +65,7 @@ class Response
             }
 
             $frames[] = [
-                'icon'  => $validator->getShowRocketName() ? null : self::ICON_ID,
+                'icon'  => self::ICON_ID,
                 'index' => $frameIndex,
                 'text'  => $this->dateDiff($rocket['date']),
             ];
