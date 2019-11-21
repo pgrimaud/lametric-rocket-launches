@@ -22,5 +22,6 @@ RUN composer install
 
 RUN chown -R www-data:www-data ${APP_PATH}
 
+
 ENTRYPOINT []
 CMD docker-php-entrypoint apache2-foreground
