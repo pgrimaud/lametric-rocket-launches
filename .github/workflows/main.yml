@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Build Docker image
+      run: docker image build -t ${{ secrets.HEROKU_APP }} .
+      env:
+        HEROKU_APP: ${{ secrets.HEROKU_APP }}
     - name: login
       uses: actions/heroku@master
       env:
