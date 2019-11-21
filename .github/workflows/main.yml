@@ -6,26 +6,26 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Build Docker image
-      run: docker image build -t ${{ secrets.HEROKU_APP }} .
-      env:
-        HEROKU_APP: ${{ secrets.HEROKU_APP }}
-    - name: login
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:login
-    - name: push
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:push -a ${{ secrets.HEROKU_APP }} web
-    - name: release
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:release -a ${{ secrets.HEROKU_APP }} web
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Login to Heroku
+        uses: actions/heroku@master
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        with:
+          args: container:login
+
+      - name: Push to Heroku
+        uses: actions/heroku@master
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        with:
+          args: container:push -a ${{ secrets.HEROKU_APP }} web
+
+      - name: Release from Heroku
+        uses: actions/heroku@master
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        with:
+          args: container:release -a ${{ secrets.HEROKU_APP }} web
