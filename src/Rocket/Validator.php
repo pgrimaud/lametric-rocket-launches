@@ -43,7 +43,7 @@ class Validator
     {
         foreach (self::MANDATORY_PARAMETERS as $mandatoryParameter) {
             if (!isset($this->parameters[$mandatoryParameter])) {
-                throw new MissingParameterException();
+                throw new MissingParameterException('Missing parameter');
             }
         }
 

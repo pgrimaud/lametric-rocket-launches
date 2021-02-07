@@ -25,7 +25,7 @@ try {
 
     echo $response->data($api->getData(), $validator);
 } catch (Exception $exception) {
-    echo $response->error();
+    echo $response->error($exception->getMessage());
 } catch (GuzzleException $exception) {
     echo $response->error();
 }
