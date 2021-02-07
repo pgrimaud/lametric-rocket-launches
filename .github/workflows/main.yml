@@ -1,31 +1,20 @@
-name: Deploy to Heroku
+name: CD
 
-on: push
+on:
+  push:
+    branches: [ master ]
 
 jobs:
-  release:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1
-
-      - name: Login to Heroku
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - uses: actions/checkout@v2
+      - uses: symfonycorp/security-checker-action@v2
+      - name: Deploy to production
+        uses: appleboy/ssh-action@master
         with:
-          args: container:login
-
-      - name: Push to Heroku
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:push -a ${{ secrets.HEROKU_APP }} web
-
-      - name: Release from Heroku
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:release -a ${{ secrets.HEROKU_APP }} web
+          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: ${{ secrets.SSH_SCRIPT }}

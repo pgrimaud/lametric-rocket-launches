@@ -9,22 +9,22 @@ use Predis\Client as PredisClient;
 
 class Api
 {
-    const DATA_ENDPOINT = 'https://launchlibrary.net/1.4/launch/next/5';
+    const DATA_ENDPOINT = 'https://ll.thespacedevs.com/2.0.0/launch/?limit=5';
 
     /**
      * @var GuzzleClient
      */
-    private $guzzleClient;
+    private GuzzleClient $guzzleClient;
 
     /**
      * @var PredisClient
      */
-    private $predisClient;
+    private PredisClient $predisClient;
 
     /**
      * @var array
      */
-    private $data;
+    private array $data;
 
     /**
      * @param GuzzleClient $guzzleClient
@@ -39,7 +39,7 @@ class Api
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function fetchData()
+    public function fetchData(): void
     {
         $redisKey = 'lametric:rocket-launches';
 
@@ -51,7 +51,7 @@ class Api
 
             // save to redis
             $this->predisClient->set($redisKey, json_encode($this->data));
-            $this->predisClient->expireat($redisKey, strtotime("+10 minutes"));
+            $this->predisClient->expire($redisKey, 60 * 10);
         } else {
             $this->data = json_decode($launchesFile, true);
         }
