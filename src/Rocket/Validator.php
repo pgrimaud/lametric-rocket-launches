@@ -16,17 +16,17 @@ class Validator
     /**
      * @var array
      */
-    private $parameters;
+    private array $parameters;
 
     /**
-     * @var integer
+     * @var int
      */
-    private $nbLaunches;
+    private int $nbLaunches;
 
     /**
      * @var bool
      */
-    private $showRocketName;
+    private bool $showRocketName;
 
     /**
      * @param array $parameters
@@ -39,7 +39,7 @@ class Validator
     /**
      * @throws MissingParameterException
      */
-    public function check()
+    public function check(): void
     {
         foreach (self::MANDATORY_PARAMETERS as $mandatoryParameter) {
             if (!isset($this->parameters[$mandatoryParameter])) {

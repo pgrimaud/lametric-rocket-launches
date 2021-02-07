@@ -9,7 +9,7 @@ use Predis\Client as PredisClient;
 
 class Api
 {
-    const DATA_ENDPOINT = 'https://ll.thespacedevs.com/2.0.0/launch/?limit=5';
+    const DATA_ENDPOINT = 'https://ll.thespacedevs.com/2.0.0/launch/upcoming?limit=5';
 
     /**
      * @var GuzzleClient
@@ -69,10 +69,10 @@ class Api
 
         $launches = [];
 
-        foreach ($data['launches'] as $launch) {
+        foreach ($data['results'] as $launch) {
             $launches[] = [
-                'date' => $launch['isostart'],
-                'name' => $launch['rocket']['name'],
+                'date' => $launch['net'],
+                'name' => $launch['name'],
             ];
         }
 
