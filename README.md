@@ -1,5 +1,8 @@
 # Next rocket launches app for LaMetric
 
+> [!CAUTION]
+> READ-ONLY : APP MIGRATED TO https://github.com/pgrimaud/lumiere
+
 Show next rocket launches on your LaMetric.
 
 ![Next Rocket](https://user-images.githubusercontent.com/1866496/59281540-bd7b3800-8c67-11e9-9a92-d4c85eca1610.gif)
